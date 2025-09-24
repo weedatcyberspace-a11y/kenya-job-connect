@@ -17,56 +17,104 @@ const jobCategories = [
     icon: Code,
     jobs: "150+ jobs",
     description: "Software development, web design, data analysis",
-    trending: true
+    trending: true,
+    details: {
+      roles: ["Software Developer", "Web Designer", "Data Analyst", "Mobile App Developer", "System Administrator", "Cybersecurity Specialist"],
+      skills: ["JavaScript, Python, React", "HTML/CSS, UI/UX Design", "SQL, Excel, Tableau", "Android/iOS Development"],
+      salaryRange: "KSh 50,000 - 200,000",
+      remote: "95% remote opportunities"
+    }
   },
   {
     title: "Customer Service",
     icon: HeadphonesIcon,
     jobs: "200+ jobs", 
     description: "Call center, support, virtual assistance",
-    trending: true
+    trending: true,
+    details: {
+      roles: ["Customer Support Representative", "Virtual Assistant", "Call Center Agent", "Live Chat Support", "Help Desk Specialist"],
+      skills: ["Excellent Communication", "Problem Solving", "Multi-tasking", "CRM Software", "English Fluency"],
+      salaryRange: "KSh 25,000 - 80,000",
+      remote: "80% remote opportunities"
+    }
   },
   {
     title: "Creative & Design",
     icon: PenTool,
     jobs: "80+ jobs",
     description: "Graphic design, content creation, marketing",
-    trending: false
+    trending: false,
+    details: {
+      roles: ["Graphic Designer", "Content Creator", "Social Media Manager", "Brand Designer", "Video Editor", "Copywriter"],
+      skills: ["Adobe Creative Suite", "Canva, Figma", "Social Media Platforms", "Content Strategy", "Photography"],
+      salaryRange: "KSh 30,000 - 120,000",
+      remote: "70% remote opportunities"
+    }
   },
   {
     title: "Sales & Marketing", 
     icon: Users,
     jobs: "120+ jobs",
     description: "Digital marketing, sales, business development",
-    trending: true
+    trending: true,
+    details: {
+      roles: ["Digital Marketing Specialist", "Sales Representative", "Business Development Manager", "SEO Specialist", "Social Media Marketer"],
+      skills: ["Digital Marketing", "Lead Generation", "CRM Management", "Google Analytics", "Sales Techniques"],
+      salaryRange: "KSh 40,000 - 150,000",
+      remote: "85% remote opportunities"
+    }
   },
   {
     title: "Data & Analytics",
     icon: BarChart3,
     jobs: "60+ jobs",
     description: "Data entry, research, market analysis", 
-    trending: false
+    trending: false,
+    details: {
+      roles: ["Data Entry Specialist", "Research Analyst", "Market Research Assistant", "Data Processor", "Survey Coordinator"],
+      skills: ["Excel Proficiency", "Data Analysis", "Research Methods", "Attention to Detail", "Statistical Software"],
+      salaryRange: "KSh 20,000 - 90,000",
+      remote: "90% remote opportunities"
+    }
   },
   {
     title: "Media & Content",
     icon: Camera,
     jobs: "45+ jobs",
     description: "Photography, video editing, writing",
-    trending: false
+    trending: false,
+    details: {
+      roles: ["Content Writer", "Video Editor", "Photographer", "Blog Writer", "Social Media Content Creator", "Journalist"],
+      skills: ["Writing & Editing", "Video Production", "Photography", "Content Management", "SEO Writing"],
+      salaryRange: "KSh 25,000 - 100,000",
+      remote: "75% remote opportunities"
+    }
   },
   {
     title: "Administrative",
     icon: Briefcase,
     jobs: "100+ jobs",
     description: "Virtual assistant, project management",
-    trending: false
+    trending: false,
+    details: {
+      roles: ["Virtual Assistant", "Project Coordinator", "Administrative Assistant", "Office Manager", "Executive Assistant"],
+      skills: ["Organization", "Time Management", "Microsoft Office", "Project Management Tools", "Communication"],
+      salaryRange: "KSh 30,000 - 100,000",
+      remote: "85% remote opportunities"
+    }
   },
   {
     title: "Logistics & Delivery", 
     icon: Truck,
     jobs: "75+ jobs",
     description: "Delivery services, supply chain, coordination",
-    trending: true
+    trending: true,
+    details: {
+      roles: ["Delivery Driver", "Logistics Coordinator", "Supply Chain Assistant", "Warehouse Assistant", "Fleet Manager"],
+      skills: ["Valid Driving License", "Route Planning", "Inventory Management", "Customer Service", "Physical Fitness"],
+      salaryRange: "KSh 25,000 - 70,000",
+      remote: "20% remote opportunities"
+    }
   }
 ];
 
@@ -104,13 +152,52 @@ const JobCategories = () => {
                     {category.title}
                   </CardTitle>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="space-y-4">
                   <p className="text-sm text-muted-foreground mb-3">
                     {category.description}
                   </p>
-                  <p className="text-sm font-medium text-primary">
-                    {category.jobs}
-                  </p>
+                  
+                  <div className="space-y-3">
+                    <div>
+                      <p className="text-xs font-semibold text-primary mb-1">Popular Roles:</p>
+                      <div className="flex flex-wrap gap-1">
+                        {category.details.roles.slice(0, 3).map((role, idx) => (
+                          <Badge key={idx} variant="outline" className="text-xs">
+                            {role}
+                          </Badge>
+                        ))}
+                        {category.details.roles.length > 3 && (
+                          <Badge variant="outline" className="text-xs">
+                            +{category.details.roles.length - 3} more
+                          </Badge>
+                        )}
+                      </div>
+                    </div>
+
+                    <div>
+                      <p className="text-xs font-semibold text-primary mb-1">Key Skills:</p>
+                      <p className="text-xs text-muted-foreground">
+                        {category.details.skills.slice(0, 2).join(", ")}
+                      </p>
+                    </div>
+
+                    <div className="flex justify-between items-center">
+                      <div>
+                        <p className="text-xs font-semibold text-primary">Salary Range</p>
+                        <p className="text-xs text-muted-foreground">{category.details.salaryRange}</p>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-xs font-semibold text-primary">Remote</p>
+                        <p className="text-xs text-muted-foreground">{category.details.remote}</p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="pt-2 border-t border-border/50">
+                    <p className="text-sm font-medium text-primary">
+                      {category.jobs}
+                    </p>
+                  </div>
                 </CardContent>
               </Card>
             );
